@@ -5,23 +5,30 @@ const path = require('path');
 const server = http.createServer((req, res) =>{
     const pathFile = './lesson_1';
     const urlFile = req.url;
-    
+
+    const reqWrite = (content, urlFile, chart) => {
+        try {
+            res.writeHead(200, {'Cotent-Type': `${content}`});
+            res.end(fs.readFileSync(`${pathFile}${urlFile}`, chart));
+        } catch (err) {
+            reqWrite('text/html', '/index.html', 'utf8')
+        }
+    }
      switch (path.extname(urlFile)){
         case '.css':
-            res.writeHead(200, {'Cotent-Type': 'text/css'});
-            res.end(fs.readFileSync(`${pathFile}${urlFile}`, 'utf-8'));
+            reqWrite('text/css', urlFile, 'utf8');
             break;
         case '.js':
-            res.writeHead(200, {'Cotent-Type': 'text/js'});
-            res.end(fs.readFileSync(`${pathFile}${urlFile}`, 'utf-8'));
+            reqWrite('text/js', urlFile, 'utf8');
             break;
         case '.jpg':
-            res.writeHead(200, {'Cotent-Type': 'image/jpeg'});
-            res.end(fs.readFileSync(`${pathFile}${urlFile}`));
+            reqWrite('image/jpeg', urlFile);
+            break;
+        case '.html':
+            reqWrite('text/html', urlFile, 'utf8');
             break;
         default:
-            res.writeHead(200, {'Cotent-Type': 'text/html'});
-            res.end(fs.readFileSync(`${pathFile}/index.html`, 'utf-8'));
+            reqWrite('text/plain', urlFile, 'utf8');
             break;
      }
 }).listen(process.env.PORT || 3000);
