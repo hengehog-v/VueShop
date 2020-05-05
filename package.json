@@ -1,0 +1,20 @@
+{
+  "name": "GIT_JS_GB",
+  "version": "1.0.0",
+  "description": "Семестровый проект JS_2",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Geekbrains-Frontend-Level-2/DrozdovaVladlena.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Geekbrains-Frontend-Level-2/DrozdovaVladlena/issues"
+  },
+  "homepage": "https://github.com/Geekbrains-Frontend-Level-2/DrozdovaVladlena#readme"
+}
