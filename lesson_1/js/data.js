@@ -36,21 +36,3 @@ let product = [
     productPrice: '7500'
     }
 ]
-
-const template = (item) => {
-    return `<div class="product-item">
-                <img src="${item.productImage}" alt="product" class="product-image" width="200" height="180">
-                <span class="product-name">${item.productName}</span>
-                <span class="price">${item.productPrice}</span>
-                <button class="button">Добавить</button></div>`
-}
-
-function createPriductItem(arr){
-    let arrElementsBlock = arr.map((item) => {
-        return template(item)}
-    )
-
-    document.querySelector('main').innerHTML = arrElementsBlock.join('');
-}
-createPriductItem(product)
-    
