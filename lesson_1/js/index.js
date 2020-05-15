@@ -1,21 +1,18 @@
-let main = document.querySelector('main');
 let cart = new Cart();
-let view = new View(main,cart);
 let listItem = new ListItem();
 
 
-for (let i = 0; i < product.length; i++){
-    let item = new Item(product[i],i);
-    listItem.addItemInList(item);
-    view.render(item);
-}
-const render = ()=>{
-    view._place.innerHTML = ''
-    for(let i = 0; i < listItem.getList().length; i++){
-        view.render(listItem.getList()[i]);
-    }
-}
+fetch('http://localhost:3000/js/data.json')
+    .then(res => {
+        return res.json()})
+    .then(res => {
+        for (let i = 0; i < res.product.length; i++){
+                let item = new Item(res.product[i],i);
+                listItem.addItemInList(item);
+        }
+        return listItem.render();
+    })
 
 document.getElementsByClassName('box-buy')[0].addEventListener('click', cart.renderCart.bind(cart));
-document.getElementsByClassName('logo')[0].addEventListener('click', render);
-console.log(listItem.getList());
+document.getElementsByClassName('logo')[0].addEventListener('click', listItem.render.bind(listItem));
+console.log(listItem.list);

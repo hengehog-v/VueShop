@@ -4,55 +4,74 @@ class Cart extends ListItem {
         this._cost = 0;
     }
 
-    removeProduct(){
-
-    }
-
-    add(buy){
-        const items = cart.getList().filter(e => e.id === buy.id);
-        if (items.length > 0){
-            items[0].incCount();
-        }else{
-        this.addItemInList(buy);
+    add(tmp, id){
+        const productBuy = new CartItem(tmp, id);
+        const existedItem = cart.list.filter(e => e.id === id)[0];
+        if (existedItem){
+            existedItem.incCount(productBuy);
+        }else {
+            this.addItemInList(productBuy);
         }
-        this.incCost(buy.getPrice());
+        this.incCost();
     }
-    dell(buy){
-        this.decCost(Number(buy.getPrice()) * buy.count);
-        this.dellItemOfList(buy.id);
+
+    dell(item){
+        return new Promise((res, req) => {
+            this.dellItemOfList(item.id);
+            this.incCost();
+            res()
+        }).then(() => this.renderCart())//?????
     }
-    incCost(price){
-        this._cost+= Number(price);
+
+    incCost(){
+        this._cost = this.list.reduce((sum, item) => Number(item.price) * item.count + sum, 0);
     }
-    decCost(price){
-        this._cost-= Number(price);
+
+    minusRender(item) {
+        return new Promise((res, req) => {
+            if (item.count == 1) {
+                this.dell(item);
+            }else {
+                item.decCount();
+                this.incCost();
+                res();
+            }
+        }).then(() => this.renderCart())//???
     }
+
+    plusRender(item){
+        return new Promise((res, req) => {
+            item.incCount();
+            this.incCost();
+            res()
+        }).then(() => this.renderCart()) 
+    }
+
     renderCart(){
-        document.querySelector('main').innerHTML = `<p>${'Sum: ' + this._cost}</p>`;
-        this._list.forEach(item => {
-            let container = document.createElement('div');
-            container.className = 'product-item-buy';
-            container.innerHTML = `
-                <button id = "${'Dell'+ item.id}">X</button>
-                <img src="${item.getImage()}" alt="product" class="product-image" width="40" height="36">
-                <span class="product-name">${item.getName()}</span>
-                <button id = "${'Plus' + item.id}" >+</button>
-                <button id = "${'Mines' + item.id}" >-</button>
-                <span>${item.count}</span>
-                <span class="price">${item.getPrice()}</span>`;
-            document.querySelector('main').appendChild(container);
-            document.getElementById('Plus' + item.id).addEventListener('click', () => {item.incCount(); this.incCost(item._product.price); this.renderCart()})
-            document.getElementById('Mines' + item.id).addEventListener('click', () => {
-                if (item.count == 1) {
-                    this.dell(item);
-                }else {
-                    item.decCount()
-                    this.decCost(item.getPrice());
-                }
-                this.renderCart();}
-            )
-            document.getElementById('Dell' + item.id).addEventListener('click', () => {this.dell(item); this.renderCart();})
-        })
+        return new Promise((res, req) => {
+            const main = document.querySelector('main');
+            main.innerHTML = `<p>${'Sum: ' + this._cost}</p>`;
+            this._list.forEach(item => {
+                let container = document.createElement('div');
+                container.className = 'product-item-buy';
+                container.innerHTML = `
+                    <button class = "Dell">X</button>
+                    <img src="${item.image}" alt="product" class="product-image" width="40" height="36">
+                    <span class="product-name">${item.name}</span>
+                    <button class = "Plus">+</button>
+                    <button class = "Mines">-</button>
+                    <span>${item.count}</span>
+                    <span class="price">${item.price}</span>`;
+                main.appendChild(container);
+                const buttonPlus = container.querySelector('.Plus');
+                const buttonMines = container.querySelector('.Mines');
+                const buttonDell = container.querySelector('.Dell');
+                buttonPlus.addEventListener('click', () => {cart.plusRender(item)})
+                buttonMines.addEventListener('click', () => {cart.minusRender(item)})
+                buttonDell.addEventListener('click', () => {this.dell(item)})
+            })
+            res();
+        }).then(() => console.log('?')) 
     }
     
     
