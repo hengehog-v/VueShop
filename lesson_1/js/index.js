@@ -9,9 +9,9 @@ fetch('http://localhost:3000/js/data.json')
         for (let i = 0; i < res.product.length; i++){
                 let item = new Item(res.product[i],i);
                 listItem.addItemInList(item);
-        }
-        return listItem.render();
-    })
+        } 
+        return listItem;
+    }).then((list) => list.render())
 
 document.getElementsByClassName('box-buy')[0].addEventListener('click', cart.renderCart.bind(cart));
 document.getElementsByClassName('logo')[0].addEventListener('click', listItem.render.bind(listItem));
