@@ -25,11 +25,11 @@ class Cart extends ListItem {
     } 
 
     minusRender(item) {
-            if (item.count === 1) {
-                return this.dellRender(item);
-            }
-            return item.decCount()
-                .then(() => {this.renderCart()})
+        if (item.count === 1) {
+            return this.dellRender(item);
+        }
+        return item.decCount()
+            .then(() => {this.renderCart()})
     }
 
     plusRender(item){
@@ -62,9 +62,6 @@ class Cart extends ListItem {
             })
         }).then(() => console.log('?')) 
     }
-    
-    
-
 }
 
 class CartItem extends Item{
@@ -86,5 +83,4 @@ class CartItem extends Item{
             res()
         });
     }
-
 }

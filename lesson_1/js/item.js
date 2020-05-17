@@ -72,8 +72,7 @@ class ListItem {
                     this.addItemInList(item);
             } 
             return this;
-        }).then((list) => list.render())
-            
+        }).then((list) => list.render())     
     }
 
     addItemInList(item) {
