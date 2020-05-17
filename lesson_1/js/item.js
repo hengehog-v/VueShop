@@ -31,8 +31,11 @@ class Item {
 }
 
 class ListItem {
-    constructor(){
+    constructor(renderFlag){
         this._list = [];
+        // if (renderFlag){
+        //     this.fetchList();
+        // } можно сделать, для того чтобы наследыванный класс не вызывал каждый раз fetchList (моих знаний не хватает чтоб понять как по нормальному)
     }
 
     get list() {
@@ -40,7 +43,7 @@ class ListItem {
     }
 
     render() {
-        return new Promise((res, req) => {
+        return new Promise((res, rej) => {
             const main = document.querySelector('main');
             main.innerHTML = ``;
             this._list.forEach(item => {
@@ -58,14 +61,29 @@ class ListItem {
             res();
         }).then(() => console.log('?'))
     }
-        
+
+    fetchList(){
+        fetch('js/data.json')
+        .then(res => {
+            return res.json()})
+        .then(res => {
+            for (let i = 0; i < res.product.length; i++){
+                    let item = new Item(res.product[i],i);
+                    this.addItemInList(item);
+            } 
+            return this;
+        }).then((list) => list.render())
+            
+    }
+
     addItemInList(item) {
         this._list.push(item);
     }
 
     dellItemOfList(id){
-        this._list = this._list.filter(item => item.id !== id);
+        return new Promise((res, rej) => {
+            this._list = this._list.filter(item => item.id !== id);
+            res();
+        })
     }
-
- 
 }

@@ -4,54 +4,44 @@ class Cart extends ListItem {
         this._cost = 0;
     }
 
+    get cost(){
+        return this._cost = this.list.reduce((sum, item) => Number(item.price) * item.count + sum, 0);
+    }
+
     add(tmp, id){
         const productBuy = new CartItem(tmp, id);
         const existedItem = cart.list.filter(e => e.id === id)[0];
         if (existedItem){
-            existedItem.incCount(productBuy);
+            return existedItem.incCount()
+                .then(() => {this.cost})
         }else {
             this.addItemInList(productBuy);
         }
-        this.incCost();
     }
 
-    dell(item){
-        return new Promise((res, req) => {
-            this.dellItemOfList(item.id);
-            this.incCost();
-            res()
-        }).then(() => this.renderCart())//?????
-    }
-
-    incCost(){
-        this._cost = this.list.reduce((sum, item) => Number(item.price) * item.count + sum, 0);
-    }
+    dellRender(item){
+        return this.dellItemOfList(item.id)
+            .then(() => this.renderCart())
+    } 
 
     minusRender(item) {
-        return new Promise((res, req) => {
-            if (item.count == 1) {
-                this.dell(item);
-            }else {
-                item.decCount();
-                this.incCost();
-                res();
+            if (item.count === 1) {
+                return this.dellRender(item);
             }
-        }).then(() => this.renderCart())//???
+            return item.decCount()
+                .then(() => {this.renderCart()})
     }
 
     plusRender(item){
-        return new Promise((res, req) => {
-            item.incCount();
-            this.incCost();
-            res()
-        }).then(() => this.renderCart()) 
+        return item.incCount()
+            .then(() => {this.renderCart()}) 
     }
 
     renderCart(){
-        return new Promise((res, req) => {
+        return new Promise((res, rej) => {
             const main = document.querySelector('main');
-            main.innerHTML = `<p>${'Sum: ' + this._cost}</p>`;
-            this._list.forEach(item => {
+            main.innerHTML = `<p>${'Sum: ' + this.cost}</p>`;
+            this.list.forEach(item => {
                 let container = document.createElement('div');
                 container.className = 'product-item-buy';
                 container.innerHTML = `
@@ -68,9 +58,8 @@ class Cart extends ListItem {
                 const buttonDell = container.querySelector('.Dell');
                 buttonPlus.addEventListener('click', () => {cart.plusRender(item)})
                 buttonMines.addEventListener('click', () => {cart.minusRender(item)})
-                buttonDell.addEventListener('click', () => {this.dell(item)})
+                buttonDell.addEventListener('click', () => {this.dellRender(item)})
             })
-            res();
         }).then(() => console.log('?')) 
     }
     
@@ -85,11 +74,17 @@ class CartItem extends Item{
     }
     
     incCount(){
-        this.count++;
+        return new Promise((res, rej) => {
+            this.count++;
+            res()
+        });
     }
 
     decCount(){
-        this.count--;
+        return new Promise((res, rej) => {
+            this.count--;
+            res()
+        });
     }
 
 }
