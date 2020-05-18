@@ -31,11 +31,9 @@ class Item {
 }
 
 class ListItem {
-    constructor(renderFlag){
+    constructor(){
         this._list = [];
-        // if (renderFlag){
-        //     this.fetchList();
-        // } можно сделать, для того чтобы наследыванный класс не вызывал каждый раз fetchList (моих знаний не хватает чтоб понять как по нормальному)
+        this.fetchList();
     }
 
     get list() {

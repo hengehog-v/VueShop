@@ -8,12 +8,15 @@ class Cart extends ListItem {
         return this._cost = this.list.reduce((sum, item) => Number(item.price) * item.count + sum, 0);
     }
 
+    fetchList() {
+        return Promise.resolve();
+    }
+
     add(tmp, id){
         const productBuy = new CartItem(tmp, id);
         const existedItem = cart.list.filter(e => e.id === id)[0];
         if (existedItem){
-            return existedItem.incCount()
-                .then(() => {this.cost})
+            return existedItem.incCount();
         }else {
             this.addItemInList(productBuy);
         }
