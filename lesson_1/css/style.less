@@ -20,6 +20,9 @@ header {
 }
 
 .logo {
+    outline: none;
+    border: none;
+    background-color: rgba(255, 255, 255, 0);
     color: @color_white;
     font-size: 40px;
     text-decoration: none;
@@ -30,6 +33,7 @@ header {
     align-items: center;
     background-color: rgba(255, 255, 255, 0);
     border: none;
+    outline: none;
     color: @color_white;
     & #box path{
         fill: @color_white;
@@ -84,6 +88,14 @@ main {
     & .button:hover {
         box-shadow: 0px 0px 5px @color_black; 
     }
+}
+
+.product-item-buy {
+    display: grid;
+    grid-template-columns: 0.3fr 0.4fr 1fr 0.3fr 0.3fr 0.3fr 50px;
+    grid-gap: 10px;
+    border: 1px solid black;
+    padding: 5px;
 }
 
 @media (min-width: 600px) and (max-width: 930px){
