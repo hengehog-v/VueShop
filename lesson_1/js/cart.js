@@ -12,6 +12,11 @@ class Cart extends ListItem {
         return Promise.resolve();
     }
 
+    height(){
+        const main = document.querySelector('main');
+        main.style.minHeight = `calc(${100 + 'vh'} - ${(document.querySelector('footer').offsetHeight + document.querySelector('header').offsetHeight) + 'px'})`
+    }
+
     add(tmp, id){
         const productBuy = new CartItem(tmp, id);
         const existedItem = cart.list.filter(e => e.id === id)[0];
@@ -41,6 +46,7 @@ class Cart extends ListItem {
     }
 
     renderCart(){
+        this.height();
         return new Promise((res, rej) => {
             const main = document.querySelector('main');
             main.innerHTML = `<p>${'Sum: ' + this.cost}</p>`;
