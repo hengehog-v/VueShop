@@ -18,17 +18,19 @@ class InputRender {
             const container = document.createElement('div');
             container.classList.add(this.name);
             container.innerHTML = `
-                <input type="text" placeholder='${this.name}' id='${'input' + this.name}'>`
+                <input type="text" placeholder='${this.name}'>`
             document.querySelector('footer').appendChild(container);
-            const input = container.querySelector(`#${'input' + this.name}`);
-            input.addEventListener('change', (event) => { this.validation(this.re)}) 
+            container.querySelector(`input`).addEventListener('change', (event) => { this.validation(this.re)}) 
         })
     }
 
     validation(re){
         if(!((re).test(event.target.value))){
             event.target.classList.add('error');
+        } else {
+            event.target.classList.remove('error');
         }
+        console.log(event.target.value.match(re))
     }
 }
 
@@ -52,4 +54,4 @@ class InputEmail extends InputRender{
 
 let inputName = new InputName('name', /(^[A-Z])([a-z]+)$/);
 let inputTelephone = new InputTelephone('telephone', /(^\+7)\(([0-9]{3})\)[0-9]{3}\-[0-9]{4}$/);
-let inputEmail = new InputEmail('email', /(^[A-Za-z])([A-Za-z0-9\.\_\-]+)([A-Za-z0-9]{1})\@([a-z]+)\.([a-z]+)$/);
+let inputEmail = new InputEmail('email', /(^[A-Za-z])((([A-Za-z0-9\.\_\-]*)(\d|[A-Za-z])\@)|\@)([a-z]+)\.([a-z]+)$/); 

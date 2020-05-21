@@ -5,6 +5,9 @@
 body {
   max-width: 1920px;
   margin: 0 auto;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
 }
 header {
   background: linear-gradient(90deg, #0b0b0b 0%, #555555 42%, #c4c4c4 76%);
@@ -12,6 +15,7 @@ header {
   justify-content: space-between;
   padding: 10px 35px;
   box-sizing: border-box;
+  flex-shrink: 0;
 }
 .logo {
   outline: none;
@@ -49,6 +53,7 @@ main {
   grid-gap: 45px;
   box-sizing: border-box;
   padding: 50px;
+  flex-grow: 1;
 }
 .product-item {
   display: flex;
@@ -94,6 +99,7 @@ footer {
   align-items: center;
   padding: 10px 35px;
   box-sizing: border-box;
+  flex-shrink: 0;
 }
 footer div {
   margin: 10px;
