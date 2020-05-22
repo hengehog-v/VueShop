@@ -54,4 +54,4 @@ class InputEmail extends InputRender{
 
 let inputName = new InputName('name', /(^[A-Z])([a-z]+)$/);
 let inputTelephone = new InputTelephone('telephone', /(^\+7)\(([0-9]{3})\)[0-9]{3}\-[0-9]{4}$/);
-let inputEmail = new InputEmail('email', /(^[A-Za-z])((([A-Za-z0-9\.\_\-]*)(\d|[A-Za-z])\@)|\@)([a-z]+)\.([a-z]+)$/); 
+let inputEmail = new InputEmail('email', /(^[A-Za-z])([\.\_\-]?[A-Za-z\d])*@[a-z]+\.[a-z]+$/); 
