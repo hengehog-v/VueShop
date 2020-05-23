@@ -1,36 +1,6 @@
-class Item {
-    constructor(objectValue, id){
-        this._product = {
-            image: objectValue.productImage,
-            name: objectValue.productName,
-            price: objectValue.productPrice
-        };
-        this.id = id;
-    }
+import Item from './item';
 
-    get price(){
-        return this._product.price;
-    }
-
-    get name(){
-        return this._product.name;
-    }
-
-    get image(){
-        return this._product.image;
-    }
-
-    addItemCart() {
-        const tmp = {
-            productImage: this._product.image,
-            productName: this._product.name,
-            productPrice: this._product.price
-        } 
-        cart.add(tmp, this.id);
-    }
-}
-
-class ListItem {
+export default class ListItem {
     constructor(){
         this._list = [];
         this.fetchList();
@@ -61,7 +31,7 @@ class ListItem {
     }
 
     fetchList(){
-        fetch('js/data.json')
+        fetch('database/data.json')
         .then(res => {
             return res.json()})
         .then(res => {

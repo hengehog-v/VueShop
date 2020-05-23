@@ -4,6 +4,9 @@
   "description": "Семестровый проект JS_2",
   "main": "index.js",
   "scripts": {
+    "build": "webpack",
+    "dev": "webpack-dev-server --open --config webpack.dev.js",
+    "start": "node server.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -16,5 +19,17 @@
   "bugs": {
     "url": "https://github.com/Geekbrains-Frontend-Level-2/DrozdovaVladlena/issues"
   },
-  "homepage": "https://github.com/Geekbrains-Frontend-Level-2/DrozdovaVladlena#readme"
+  "homepage": "https://github.com/Geekbrains-Frontend-Level-2/DrozdovaVladlena#readme",
+  "devDependencies": {
+    "css-loader": "^3.5.3",
+    "file-loader": "^6.0.0",
+    "less-loader": "^6.1.0",
+    "style-loader": "^1.2.1",
+    "webpack": "^4.43.0",
+    "webpack-cli": "^3.3.11",
+    "webpack-dev-server": "^3.11.0"
+  },
+  "dependencies": {
+    "webpack-merge": "^4.2.2"
+  }
 }

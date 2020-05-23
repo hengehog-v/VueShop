@@ -1,4 +1,7 @@
-class Cart extends ListItem {
+import ListItem from './listItem'
+import CartItem from './cartItem'
+
+export default class Cart extends ListItem {
     constructor(){
         super();
         this._cost = 0;
@@ -14,7 +17,7 @@ class Cart extends ListItem {
 
     add(tmp, id){
         const productBuy = new CartItem(tmp, id);
-        const existedItem = cart.list.filter(e => e.id === id)[0];
+        const existedItem = this.list.filter(e => e.id === id)[0];
         if (existedItem){
             return existedItem.incCount();
         }else {
@@ -59,31 +62,10 @@ class Cart extends ListItem {
                 const buttonPlus = container.querySelector('.Plus');
                 const buttonMines = container.querySelector('.Mines');
                 const buttonDell = container.querySelector('.Dell');
-                buttonPlus.addEventListener('click', () => {cart.plusRender(item)})
-                buttonMines.addEventListener('click', () => {cart.minusRender(item)})
+                buttonPlus.addEventListener('click', () => {this.plusRender(item)})
+                buttonMines.addEventListener('click', () => {this.minusRender(item)})
                 buttonDell.addEventListener('click', () => {this.dellRender(item)})
             })
         }).then(() => console.log('?')) 
-    }
-}
-
-class CartItem extends Item{
-    constructor(product, id) {
-        super(product, id);
-        this.count = 1; 
-    }
-    
-    incCount(){
-        return new Promise((res, rej) => {
-            this.count++;
-            res()
-        });
-    }
-
-    decCount(){
-        return new Promise((res, rej) => {
-            this.count--;
-            res()
-        });
     }
 }
