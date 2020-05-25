@@ -1,6 +1,6 @@
 import Cart from './cart';
 import ListItem from './listItem';
-import './../css/style.less';
+import '../css/style.less';
 
 export const cart = new Cart();
 let listItem = new ListItem();
