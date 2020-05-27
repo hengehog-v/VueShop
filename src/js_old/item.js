@@ -1,4 +1,4 @@
-import {cart} from './index'
+import {cart} from '../js/index'
 
 export default class Item {
     constructor(objectValue, id){
