@@ -1,15 +1,19 @@
 const fs = require('fs');
 const http = require('http');
-const path = require('path');
 
 const server = http.createServer((req, res) =>{
-    const pathFile = './lesson_1';
+    const pathFile = './public';
     const urlFile = req.url;
     console.log(urlFile)
     let inquiry;
 
     try {
-        inquiry = fs.readFileSync(`${pathFile}${urlFile}`);
+        if (/\.js$/.test(urlFile)){
+            inquiry = fs.readFileSync(`${pathFile}/js/${urlFile}`);
+        }else if (/\.*/.test(urlFile)){
+            inquiry = fs.readFileSync(`${pathFile}${urlFile}`);
+        } 
+
     } catch (err) {
         inquiry = fs.readFileSync( `${pathFile}/index.html`, 'utf8')
     }

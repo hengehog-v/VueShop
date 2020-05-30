@@ -1,0 +1,49 @@
+{   
+    "1": { "id": 1,
+    "productImage": "./img/sneakers_1.jpg",
+    "productName": "Кроссовки NIKE Air Max 97 SE",
+    "productPrice": 7990
+    },
+
+    "2": { "id": 2,
+    "productImage": "./img/sneakers_2.jpg",
+    "productName": "Кроссовки NIKE Air Max 95 SE Premium",
+    "productPrice": 9990
+    },
+
+    "3": { "id": 3,
+    "productImage": "./img/sneakers_3.jpg",
+    "productName": "Кроссовки NIKE Air Max 95 Premium",
+    "productPrice": 7990
+    },
+    "4": { "id": 4,
+    "productImage": "./img/sneakers_4.jpg",
+    "productName": "Кроссовки NIKE Air Max 97",
+    "productPrice": 9990
+    },
+    "5": { "id": 5,
+    "productImage": "./img/sneakers_5.jpg",
+    "productName": "Кроссовки NIKE Air Max 95/OG",
+    "productPrice": 8390
+    },
+    "6": { "id": 6,
+    "productImage": "./img/sneakers_6.jpg",
+    "productName": "Кроссовки ASICS Gel-Lyte GoreTex",
+    "productPrice": 4950
+    },
+    "7": { "id": 7,
+    "productImage": "./img/sneakers_7.jpg",
+    "productName": "Кроссовки adidas Originals Ozweego",
+    "productPrice": 5500
+    },
+    "8": { "id": 8,
+    "productImage": "./img/sneakers_8.jpg",
+    "productName": "Кроссовки NIKE Air Huarache Ultra",
+    "productPrice": 7990
+    },
+    "9": { "id": 9,
+    "productImage": "./img/sneakers_9.jpg",
+    "productName": "Кроссовки ASICS Gel-Kayano 5 OG",
+    "productPrice": 7500
+    }
+}
