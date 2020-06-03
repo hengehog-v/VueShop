@@ -3,7 +3,7 @@
         <img :src="productImage" alt="product" :class="[$style.product_image]" width="200" height="180">
         <span :class="[$style.product_name]">{{productName}}</span>
         <span :class="[$style.price]">{{productPrice}}</span>
-        <button @click="addItemOnCart(id)" :class="[$style.button]">Добавить</button>
+        <button @click="addItem" :class="[$style.button]">Добавить</button>
     </div>
 </template>
 
@@ -17,8 +17,15 @@ export default {
 
     methods: {
         ...mapActions('goods', [
-            'addItemOnCart'
-        ])
+            'addItemOnCart',
+            'incCount'
+        ]), 
+
+        addItem(){
+            if (this.dataGoods.count) {
+                this.incCount(this.id)
+            } else this.addItemOnCart(this.id)
+        }
     },
 
     computed: {
@@ -27,19 +34,19 @@ export default {
         ]),
 
         dataGoods() {
-        return this.getData[this.id];
+        return  this.getData[this.id];
         },
 
         productImage() {
-        return this.dataGoods.productImage;
+        return this.dataGoods.image;
         },
 
         productName() {
-            return this.dataGoods.productName;
+            return this.dataGoods.name;
         },
 
         productPrice() {
-            return this.dataGoods.productPrice;
+            return this.dataGoods.price;
         }
     },
 }
