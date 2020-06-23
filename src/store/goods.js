@@ -16,8 +16,8 @@ const actions = {
     requestData({commit}){
         fetch('/Item')
         .then(res => res.json())
-        .then(res => commit('setData', res))
-        commit('sumBuyChange')
+        .then(res => {commit('setData', res) 
+                    commit('sumBuyChange')})
     },
 
     addItem({commit}, formData){
@@ -37,8 +37,8 @@ const actions = {
             body: formData,
         })
         .then(res => res.json())
-        .then(res => commit('setData', res))
-        .then(res => commit('sumBuyChange'))
+        .then(res => {commit('setData', res) 
+                    commit('sumBuyChange')})
     },
 
     dellItem({commit}, id) {
@@ -49,20 +49,8 @@ const actions = {
             body: formData,
         })
         .then(res => res.json())
-        .then(res => commit('setData', res))
-        .then(res => commit('sumBuyChange'))
-    },
-
-    incCount({commit}, id) {
-        const formData = new FormData()
-        formData.append('id', id) 
-        fetch('/CartItemIncCount', {
-            method: 'POST',
-            body: formData,
-        })
-        .then(res => res.json())
-        .then(res => commit('setData', res))
-        .then(res => commit('sumBuyChange'))
+        .then(res => {commit('setData', res) 
+                    commit('sumBuyChange')})
     },
 
     decCount({commit}, id) {
@@ -73,8 +61,8 @@ const actions = {
             body: formData,
         })
         .then(res => res.json())
-        .then(res => commit('setData', res))
-        .then(res => commit('sumBuyChange'))
+        .then(res => {commit('setData', res) 
+                    commit('sumBuyChange')})
     }
 }
 

@@ -2,9 +2,9 @@
     <div>
         <div :class="[$style.product_item_buy]">
             <button @click="dellItem(id)" :class="[$style.dell]">X</button>
-            <img v-bind:src="productImage" alt="product" :class="[$style.product_image]" width="40" height="36">
+            <img :src="productImage" alt="product" :class="[$style.product_image]" width="40" height="36">
             <span :class="[$style.product_name]">{{productName}}</span>
-            <button @click="incCount(id)" :class="[$style.plus]">+</button>
+            <button @click="addItemOnCart(id)" :class="[$style.plus]">+</button>
             <button @click="dec" :class="[$style.mines]">-</button>
             <span>{{count}}</span>
             <span :class="[$style.price]">{{productPrice}}</span>
@@ -23,7 +23,7 @@ export default {
     methods: {
         ...mapActions('goods', [
             'dellItem',
-            'incCount',
+            'addItemOnCart',
             'decCount'
         ]),
 

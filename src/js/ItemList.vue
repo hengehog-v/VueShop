@@ -18,13 +18,10 @@ export default {
     methods: {
         ...mapActions('goods', [
             'addItemOnCart',
-            'incCount'
         ]), 
 
         addItem(){
-            if (this.dataGoods.count) {
-                this.incCount(this.id)
-            } else this.addItemOnCart(this.id)
+            this.addItemOnCart(this.id)
         }
     },
 

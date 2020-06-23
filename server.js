@@ -49,26 +49,30 @@ app.post("/CartItemAdd", function (req, res) {
     fs.readFile('./public/database/data.json', 'utf8', (err, data) => {
         let list = JSON.parse(data || '{}')
         const newData = req.body.id
-        list[newData].count = 1
     
+        if (list[newData].count === undefined) 
+            list[newData].count = 1
+        else
+            list[newData].count++
+
         fs.writeFile('./public/database/data.json', JSON.stringify(list), () => {
             res.send(list)
         })
     })
 });
 
-app.post("/CartItemIncCount", function (req, res) {
-    fs.readFile('./public/database/data.json', 'utf8', (err, data) => {
-        let list = JSON.parse(data || '{}')
-        const newData = req.body.id
-        console.log(newData)
-        list[newData].count++
+// app.post("/CartItemIncCount", function (req, res) {
+//     fs.readFile('./public/database/data.json', 'utf8', (err, data) => {
+//         let list = JSON.parse(data || '{}')
+//         const newData = req.body.id
+//         console.log(newData)
+//         list[newData].count++
     
-        fs.writeFile('./public/database/data.json', JSON.stringify(list), () => {
-            res.send(list)
-        })
-    })
-});
+//         fs.writeFile('./public/database/data.json', JSON.stringify(list), () => {
+//             res.send(list)
+//         })
+//     })
+// });
 
 app.post("/CartItemDecCount", function (req, res) {
     fs.readFile('./public/database/data.json', 'utf8', (err, data) => {

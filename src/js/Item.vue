@@ -51,7 +51,9 @@ export default {
         },
 
         file() {
-            this.image = this.$refs.image.files[0]
+            console.log(this.$refs.image)
+            if(this.$refs.image)
+                this.image = this.$refs.image.files[0]
         },
 }
 
