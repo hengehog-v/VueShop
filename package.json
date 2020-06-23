@@ -31,7 +31,10 @@
     "webpack-dev-server": "^3.11.0"
   },
   "dependencies": {
+    "express": "^4.17.1",
+    "express-fileupload": "^1.1.7-alpha.3",
     "less": "^3.11.1",
+    "multer": "^1.4.2",
     "vue": "^2.6.11",
     "vue-loader": "^15.9.2",
     "vue-router": "^3.2.0",

@@ -5,7 +5,7 @@
             <img v-bind:src="productImage" alt="product" :class="[$style.product_image]" width="40" height="36">
             <span :class="[$style.product_name]">{{productName}}</span>
             <button @click="incCount(id)" :class="[$style.plus]">+</button>
-            <button @click="decCount(id)" :class="[$style.mines]">-</button>
+            <button @click="dec" :class="[$style.mines]">-</button>
             <span>{{count}}</span>
             <span :class="[$style.price]">{{productPrice}}</span>
         </div>
@@ -25,7 +25,13 @@ export default {
             'dellItem',
             'incCount',
             'decCount'
-        ])
+        ]),
+
+        dec() {
+            if (this.count === 1) {
+                this.dellItem(this.id)
+            } else this.decCount(this.id)
+        }
     },
 
     computed: {
@@ -34,19 +40,19 @@ export default {
         ]),
 
         dataGoods() {
-            return this.getData[this.id] = {...this.getData[this.id]};
+            return {...this.getData[this.id]};
         },
 
         productImage() {
-            return this.dataGoods.productImage;
+            return this.dataGoods.image;
         },
 
         productName() {
-            return this.dataGoods.productName;
+            return this.dataGoods.name;
         },
 
         productPrice() {
-            return this.dataGoods.productPrice;
+            return +this.dataGoods.price;
         },
 
         count() {
